@@ -209,7 +209,22 @@ function openNotifyModal(targets, titleText) {
 
   notifySummary.textContent =
     `${targets.length} connection${targets.length === 1 ? '' : 's'} will be included in this notification.`;
-
+  // Render read-only preview list of connections being notified.
+  const listEl = document.getElementById('notifyList');
+  if (listEl) {
+    if (!targets.length) {
+      listEl.innerHTML = '<div class="notify-list-empty">No connections selected.</div>';
+    } else {
+      listEl.innerHTML = targets.map(t => {
+        const bucket = expiryBucket(t.expiryDays);
+        const label  = expiryLabel(t.expiryDays);
+        return `<div class="notify-item">
+          <div><span class="name">${escapeHtml(t.name)}</span><span class="source">${escapeHtml(t.source)}</span></div>
+          <span class="expiry-mini ${bucket}">${escapeHtml(label)}</span>
+        </div>`;
+      }).join('');
+    }
+  }
   subjectInput.value = targets.length === 1
     ? `Action required: reauthenticate ${targets[0].name}`
     : `Action required: ${targets.length} marketing connections need reauthentication`;
