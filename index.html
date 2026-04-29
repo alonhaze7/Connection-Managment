@@ -114,8 +114,13 @@
         <button class="modal-close" id="notifyClose" aria-label="Close">×</button>
       </header>
 
-      <div class="modal-body">
+           <div class="modal-body">
         <p class="modal-summary" id="notifySummary"></p>
+
+        <div class="field">
+          <label>Connections included</label>
+          <div class="notify-list" id="notifyList"></div>
+        </div>
 
         <div class="field">
           <label>Channel</label>
@@ -123,6 +128,28 @@
             <label><input type="radio" name="channel" value="email" checked /> Email</label>
             <label><input type="radio" name="channel" value="slack" /> Slack</label>
           </div>
+        </div>
+
+        <div class="field" id="emailField">
+          <label for="recipients">Recipients (comma-separated)</label>
+          <input type="text" id="recipients" placeholder="owner@example.com, ops@example.com" />
+        </div>
+
+        <div class="field" id="slackField" hidden>
+          <label for="slackChannel">Slack channel</label>
+          <input type="text" id="slackChannel" placeholder="#marketing-data-ops" />
+        </div>
+
+        <div class="field">
+          <label for="msgSubject">Subject <span class="field-hint">— prefilled, edit if needed</span></label>
+          <input type="text" id="msgSubject" />
+        </div>
+
+        <div class="field">
+          <label for="msgBody">Message <span class="field-hint">— prefilled, edit if needed</span></label>
+          <textarea id="msgBody" rows="6"></textarea>
+        </div>
+      </div>
         </div>
 
         <div class="field" id="emailField">
